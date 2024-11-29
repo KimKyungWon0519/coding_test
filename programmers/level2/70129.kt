@@ -1,6 +1,4 @@
-package level_2
-
-class Solution_70129 {
+class Solution {
     fun solution(s: String): IntArray {
         var convertString = s
         var zeroCount = 0
@@ -22,5 +20,5 @@ class Solution_70129 {
 }
 
 fun main() {
-    println(Solution_70129().solution("110010101001").joinToString())
+    println(Solution().solution("110010101001").joinToString())
 }
