@@ -15,13 +15,7 @@ class Solution_2981 {
             }
         }
 
-        for (entry in map) {
-            if (entry.value >= 3 && answer.length < entry.key.length) {
-                answer = entry.key
-            }
-        }
-
-        return if (answer.isBlank()) -1 else answer.length
+        return map.filter { it.value >= 3 }.maxOfOrNull { it.key.length } ?: -1
     }
 }
 
