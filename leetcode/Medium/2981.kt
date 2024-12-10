@@ -1,49 +1,27 @@
 class Solution_2981 {
     fun maximumLength(s: String): Int {
-        var special: String = ""
-        val dp: MutableList<String> = mutableListOf()
+        val map: MutableMap<String, Int> = mutableMapOf()
+        var answer: String = ""
 
-        for (i: Int in 0 until s.length) {
-            for (j: Int in i + 1..s.length) {
+        for (i in 0 until s.length) {
+            for (j in i + 1..s.length) {
                 val tempSpecial: String = s.substring(i, j)
 
-                if (tempSpecial.count { it == tempSpecial.get(0) } != tempSpecial.length) {
-                    continue
-                }
-
-                if (dp.contains(tempSpecial)) {
-                    continue
-                } else {
-                    dp.add(tempSpecial)
-                }
-
-                val count: Int = getCount(s, tempSpecial)
-
-                if (count >= 3 && special.length < tempSpecial.length) {
-                    special = tempSpecial
+                if (map.containsKey(tempSpecial)) {
+                    map[tempSpecial] = map[tempSpecial]!! + 1
+                } else if (tempSpecial.count { it == tempSpecial.get(0) } == tempSpecial.length) {
+                    map[tempSpecial] = 1
                 }
             }
         }
 
-        return if (special.isNotBlank()) special.length else -1
-    }
-
-    private fun getCount(origin: String, special: String): Int {
-        var count: Int = 0
-
-        for (i: Int in origin.indices) {
-            if (i + special.length > origin.length) {
-                break
-            }
-
-            val subString: String = origin.substring(i, i + special.length)
-
-            if (subString == special) {
-                count++
+        for (entry in map) {
+            if (entry.value >= 3 && answer.length < entry.key.length) {
+                answer = entry.key
             }
         }
 
-        return count
+        return if (answer.isBlank()) -1 else answer.length
     }
 }
 
