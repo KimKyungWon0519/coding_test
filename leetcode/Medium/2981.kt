@@ -4,7 +4,7 @@ class Solution_2981 {
         val dp: MutableList<String> = mutableListOf()
 
         for (i: Int in 0 until s.length) {
-            for (j: Int in i + 1 until s.length) {
+            for (j: Int in i + 1..s.length) {
                 val tempSpecial: String = s.substring(i, j)
 
                 if (tempSpecial.count { it == tempSpecial.get(0) } != tempSpecial.length) {
